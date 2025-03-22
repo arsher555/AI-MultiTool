@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My AI MultiTool</title>
+    <script>
+        async function generateAIResponse() {
+            let userInput = document.getElementById("userInput").value;
+            let response = await fetch("https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateText?key=YOUR_API_KEY", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ prompt: { text: userInput } })
+            });
+            let data = await response.json();
+            document.getElementById("output").innerText = data.candidates[0].output;
+        }
+    </script>
+</head>
+<body>
+    <h1>Welcome to My AI MultiTool</h1>
+    <input type="text" id="userInput" placeholder="Enter your text...">
+    <button onclick="generateAIResponse()">Generate</button>
+    <p id="output"></p>
+</body>
+</html>
